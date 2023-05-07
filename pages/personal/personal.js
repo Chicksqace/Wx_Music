@@ -1,13 +1,42 @@
 // pages/personal/personal.js
+let startY=0//手指起始的坐标
+let moveY=0//手指移动的坐标
+let moveDistance=0 //手指移动的距离
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        coverTraansform:'translateY(0rpx)',
+        coverTransition:''
     },
-
+    handleTouchStart(e){
+        this.setData({
+            coverTransition:''
+        })
+        startY=e.touches[0].clientY
+    },
+    handleTouchMove(e){
+        moveY=e.touches[0].clientY
+        moveDistance=moveY-startY
+        if(moveDistance<=0){
+            return;
+        }
+        if(moveDistance>=80){
+            moveDistance=80
+        }
+        // 动态更新coverTransform的状态值
+        this.setData({
+            coverTraansform:`translateY(${moveDistance}rpx)`
+        })
+    },
+    handleTouchEnd(){
+        this.setData({
+            coverTraansform:`translateY(0rpx)`,
+            coverTransition:'transform 1s linear'
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
