@@ -1,4 +1,5 @@
 // pages/personal/personal.js
+import request from '../../utils/request'
 let startY=0//手指起始的坐标
 let moveY=0//手指移动的坐标
 let moveDistance=0 //手指移动的距离
@@ -9,11 +10,13 @@ Page({
      */
     data: {
         coverTraansform:'translateY(0rpx)',
-        coverTransition:''
+        coverTransition:'',
+        userInfo:{},//用户信息
+        recentPlayList:[]//用户播放记录
     },
     handleTouchStart(e){
         this.setData({
-            coverTransition:''
+            coverTransition:'transform 1s linear'
         })
         startY=e.touches[0].clientY
     },
@@ -37,13 +40,38 @@ Page({
             coverTransition:'transform 1s linear'
         })
     },
+    // 跳转至登录界面的回调
+    toLogin(){
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        // 用户的基本信息
+        let userInfo=wx.getStorageSync('userInfo')
+        if(userInfo){
+            this.setData({
+                userInfo:JSON.parse(userInfo)
+            })
+            // 获取用户播放记录
+            this.getUserRecentPlayList()
+        }
     },
-
+    // 获取用户播放记录的功能函数
+    async getUserRecentPlayList(){
+        let recentPlayListData=await request('/user/record',{uid:8023474819,type:0})
+        let index=0
+        let recentPlayList=recentPlayListData.allData.splice(0,10).map(item=>{
+            item.id=index++
+            return item
+        })
+        this.setData({
+            recentPlayList:recentPlayList
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
