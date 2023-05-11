@@ -1,2 +1,28 @@
 <!--pages/video/video.wxml-->
-<text>pages/video/video.wxml</text>
+<view class="videoContainer">
+    <view class="header">
+        <image src="/static/images/video/video.jpg" mode=""/>
+        <view class="search">
+            搜索商品
+        </view>
+        <image src="/static/images/logo.png" mode=""/>
+    </view>
+    <!-- 导航区域 -->
+    <scroll-view scroll-x scroll-with-animation scroll-into-view="{{'scroll'+navId}}" class="navSrcoll" enable-flex>
+        <view id="{{'scroll'+item.id}}" class="navItem" wx:for="{{videoGroupList}}" wx:key="id">
+            <view class="navContent {{navId==item.id?'active':''}}" bindtap="changeNav" id="{{item.id}}" >
+                {{item.name}}
+            </view>
+        </view>
+    </scroll-view>
+    <!-- 视频的列表区域 -->
+    <scroll-view scroll-y sc class="videoScroll">
+        <view class="videoItem" wx:for="{{videoList}}" id="id" wx:key="id">
+            <video src="{{item.url}}" class="common" bindtap="handlePlay" id="{{item.id}}" poster="http://p1.music.126.net/RxBSKhZXMee5gn5Gg2p8TQ==/109951163573071019.jpg" object-fit="fill" autoplay wx:if="{{videoId===item.id}}" bindtimeupdate="handleTimeUpdate" bindended="handleEnded"/>
+            <image wx:else class="common" bindtap="handlePlay" id="89ADDE33C0AAE8EC14B99F6750DB954D" src="http://p1.music.126.net/RxBSKhZXMee5gn5Gg2p8TQ==/109951163573071019.jpg" mode=""/>
+            <video src="{{item.url}}" bindtap="handlePlay" id="{{item.id}}"/>
+            <video src="{{item.url}}" bindtap="handlePlay" id="{{item.id}}"/>
+            <video src="{{item.url}}" bindtap="handlePlay" id="{{item.id}}"/>
+        </view>
+    </scroll-view>
+</view>
