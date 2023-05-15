@@ -10,7 +10,8 @@ Page({
         navId:"",//导航的标识
         videoList:[],//视频的列表数据
         videoId:'',    //视频ID标识
-        videoUpdateTime:[]//记录video播放时长
+        videoUpdateTime:[],//记录video播放时长
+        isTriggered:false,//标识下拉刷新
     },
 
     /**
@@ -36,8 +37,10 @@ Page({
         let videoList=videoListData.urls
         // 关闭消息提示框
         wx.hideLoading()
+        // 关闭下载刷新
         this.setData({
-            videoList
+            videoList,
+            isTriggered:false
         })
     },
     // 点击切换导航的回调
@@ -98,6 +101,14 @@ Page({
             videoUpdateTime
         })
     },
+    // 自定义下拉刷新回调
+    handleRefresher(){
+        this.getVideoList(this.data.navId)
+    },
+    // 上拉触底
+    handleToLower(){
+        console.log('网易云音乐暂时没有提供该接口');
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -143,7 +154,19 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage() {
-
+    onShareAppMessage({from}) {
+        if(from ==='button'){
+            return{
+                title:'来自button的转发',
+                page:'/pages/video/video',
+                imageUrl:'/static/images/nvsheng.jpg'
+            }
+        }else{
+            return{
+                title:'来自menu的转发',
+                page:'/pages/video/video',
+                imageUrl:'/static/images/nvsheng.jpg'
+            }
+        }
     }
 })

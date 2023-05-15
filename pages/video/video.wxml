@@ -16,10 +16,13 @@
         </view>
     </scroll-view>
     <!-- 视频的列表区域 -->
-    <scroll-view scroll-y sc class="videoScroll">
+    <scroll-view scroll-y sc class="videoScroll" bindrefresherrefresh="handleRefresher" refresher-enabled refresher-triggered="{{ isTriggered }}" bindscrolltolower="handleToLower">
         <view class="videoItem" wx:for="{{videoList}}" id="id" wx:key="id">
             <video src="{{item.url}}" class="common" bindtap="handlePlay" id="{{item.id}}" poster="http://p1.music.126.net/RxBSKhZXMee5gn5Gg2p8TQ==/109951163573071019.jpg" object-fit="fill" autoplay wx:if="{{videoId===item.id}}" bindtimeupdate="handleTimeUpdate" bindended="handleEnded"/>
             <image wx:else class="common" bindtap="handlePlay" id="89ADDE33C0AAE8EC14B99F6750DB954D" src="http://p1.music.126.net/RxBSKhZXMee5gn5Gg2p8TQ==/109951163573071019.jpg" mode=""/>
+            <button class="item btn" open-type="share">
+                <text class="iconfont icon-genduo">转发</text>
+            </button>
             <video src="{{item.url}}" bindtap="handlePlay" id="{{item.id}}"/>
             <video src="{{item.url}}" bindtap="handlePlay" id="{{item.id}}"/>
             <video src="{{item.url}}" bindtap="handlePlay" id="{{item.id}}"/>
