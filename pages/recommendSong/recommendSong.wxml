@@ -15,7 +15,7 @@
         </view>
         <!-- 内容区域 -->
         <scroll-view scroll-y class="listScroll">
-            <view class="srcollItem" wx:for="{{recommendList}}" wx:key="id">
+            <view class="srcollItem" wx:for="{{recommendList}}" data-index="{{index}}" wx:key="id" bindtap="toSongDetail" data-song='{{item}}'>
                 <image src="{{item.al.picUrl}}" mode=""/>
                 <view class="musicInfo">
                     <text class="musicName">{{item.name}}</text>

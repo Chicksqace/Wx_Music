@@ -35,6 +35,13 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/songDetail/songDetail",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }
