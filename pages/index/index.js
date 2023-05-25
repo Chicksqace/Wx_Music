@@ -11,7 +11,13 @@ Page({
         recommendList:[],//推荐歌单
         topList:[],//排行榜数据
     },
-
+        // 跳转recommendSong页面
+        toRecommendSong(){
+            console.log(1);
+            wx.navigateTo({
+              url: '/pages/recommendSong/recommendSong',
+            })
+        },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -36,12 +42,8 @@ Page({
             this.setData({
                 topList:resultArr
             })
-        }
-       
-        
-      
+        } 
     },
-
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
