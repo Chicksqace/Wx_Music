@@ -4,6 +4,7 @@
     "pages/personal/personal",
     "pages/video/video",
     "pages/login/login",
+    "pages/search/search",
     "pages/recommendSong/recommendSong",
     "pages/songDetail/songDetail"
   ],
